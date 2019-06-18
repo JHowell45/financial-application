@@ -1,5 +1,7 @@
-"""
+"""Use this file to create a factory function for generating a Flask instance.
 
+This file contains a function for creating a factory Flask application instance and
+also initialising any of the extensions used by the application.
 """
 from flask import Flask
 from backend.config import Config
