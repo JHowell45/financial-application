@@ -12,5 +12,4 @@ RUN pipenv install --deploy
 
 COPY . /app
 
-ENTRYPOINT ["pipenv", "run", "gunicorn"]
-CMD ["wsgi:app"]
+CMD ["pipenv", "run", "gunicorn", "wsgi:app"]
