@@ -4,7 +4,7 @@ This file contains a function for creating a factory Flask application instance 
 also initialising any of the extensions used by the application.
 """
 from flask import Flask
-from backend.config import Config
+from config import Config
 
 
 def create_app(config_class=Config):
