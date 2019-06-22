@@ -1,11 +1,16 @@
 FROM python:3.7-alpine
 
-COPY . /app
+# Updates and installations:
+RUN pip install pipenv
 
+# Setup working directory:
 WORKDIR /app
 
-RUN pip install pipenv
+## Install requirements:
+COPY Pipfile Pipfile.lock ./
 RUN pipenv install --deploy
 
-ENTRYPOINT ["pipenv", "run", "python"]
-CMD ["wsgi.py"]
+COPY . /app
+
+ENTRYPOINT ["pipenv", "run", "gunicorn"]
+CMD ["wsgi:app"]
