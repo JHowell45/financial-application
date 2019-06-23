@@ -4,6 +4,8 @@ This file contains a function for creating a factory Flask application instance 
 also initialising any of the extensions used by the application.
 """
 from flask import Flask
+
+from app.extensions import api
 from config import Config
 
 
@@ -18,5 +20,7 @@ def create_app(config_class=Config):
     """
     app = Flask(__name__)
     app.config.from_object(config_class)
+
+    api.init_app(app)
 
     return app
