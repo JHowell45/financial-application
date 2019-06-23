@@ -12,4 +12,4 @@ RUN pipenv install --deploy
 
 COPY . /app
 
-CMD ["pipenv", "run", "gunicorn", "wsgi:app"]
+CMD ["pipenv", "run", "gunicorn", "-c", "gunicorn_config.py", "wsgi:app"]
