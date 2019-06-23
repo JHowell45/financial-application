@@ -5,4 +5,7 @@ application.
 """
 from flask_restplus import Api
 
+from app.routes.test_route import api as test_ns
+
 api = Api()
+api.add_namespace(test_ns)
