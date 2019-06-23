@@ -3,3 +3,6 @@
 This file contains the instances of all of the extensions required for this Flask
 application.
 """
+from flask_restplus import Api
+
+api = Api()
