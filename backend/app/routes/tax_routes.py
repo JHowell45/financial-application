@@ -15,16 +15,11 @@ api = Namespace(
 )
 
 
-@api.route("/income")
+@api.route("/income/<int:income>")
 class IncomeTaxes(Resource):
-    def get(self):
-        parser = reqparse.RequestParser()
-        parser.add_argument(
-            "income", type=int, help="Your pre-tax income or salary for an entire year."
-        )
-        args = parser.parse_args()
+    def get(self, income):
         return {
-            "total_income": args["income"],
+            "total_income": income,
             "national_insurance": 0,
             "leftover_income": 0,
             "income_tax": 0,
