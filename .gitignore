@@ -2,4 +2,4 @@
 .idea
 
 # Ignore test docs:
-backend/docs/test_reports/
+backend/docs/test/
