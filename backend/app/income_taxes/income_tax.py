@@ -23,4 +23,7 @@ def calculate_income_tax(income: int) -> float:
     :param income: the users pre-tax income.
     :return: the income tax and the leftover income for the user.
     """
-    return 0
+    if income <= TAX_BREAKDOWN["personal_allowance"]["upper_band"]:
+        return 0
+    else:
+        income -= TAX_BREAKDOWN["personal_allowance"]
