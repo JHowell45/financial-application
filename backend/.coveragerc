@@ -1,0 +1,32 @@
+[run]
+branch = True
+concurrency = multiprocessing
+omit =
+  *venv*
+  *__init__.py*
+  *python3.5/*
+  *virtualenvs/*
+
+[paths]
+
+[report]
+exclude_lines =
+
+  # Have to re-enable the standard pragma:
+  pragma: no cover
+
+  # Ignore import statements:
+  from *
+
+  # Don't complain if non-runnable code isn't run:
+  if 0:
+  if __name__ == .__main__.:
+
+fail_under = 100
+
+precision = 2
+
+[html]
+directory = htmlcov
+
+[xml]
