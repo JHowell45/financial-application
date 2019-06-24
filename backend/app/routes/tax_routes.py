@@ -37,7 +37,7 @@ class IncomeTaxes(Resource):
         return {
             "total_income": income,
             "national_insurance": 0,
-            "leftover_income": calculate_income_tax[1],
-            "income_tax": calculate_income_tax[0],
+            "leftover_income": 0,
+            "income_tax": calculate_income_tax(),
             "university_repayments": 0,
         }

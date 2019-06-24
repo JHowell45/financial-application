@@ -3,7 +3,6 @@
 This file contains the functions for calculating the income tax for a given user
 income and returning both the leftover income tax and the income tax being paid.
 """
-from typing import Tuple
 
 from .utils import create_tax_rate
 
@@ -15,7 +14,7 @@ TAX_BREAKDOWN = {
 }
 
 
-def calculate_income_tax(income: int) -> Tuple[float, float]:
+def calculate_income_tax(income: int) -> float:
     """Use this function for calculating the income tax for the users income.
 
     This function is used for just calculating the income tax for a given income and
@@ -24,6 +23,4 @@ def calculate_income_tax(income: int) -> Tuple[float, float]:
     :param income: the users pre-tax income.
     :return: the income tax and the leftover income for the user.
     """
-    income_tax = 0
-    leftover_income = income - income_tax
-    return income_tax, leftover_income
+    return 0
