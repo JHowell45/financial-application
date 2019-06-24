@@ -4,7 +4,9 @@ This file contains API endpoints that are used for calculating the taxes for an
 individual and returning the amount left over and the taxes paid and the taxes break
 down.
 """
-from flask_restplus import Namespace, Resource, reqparse
+from flask_restplus import Namespace, Resource
+
+from app.income_taxes import calculate_income_tax
 
 api = Namespace(
     "taxes",
@@ -35,7 +37,7 @@ class IncomeTaxes(Resource):
         return {
             "total_income": income,
             "national_insurance": 0,
-            "leftover_income": 0,
-            "income_tax": 0,
+            "leftover_income": calculate_income_tax[1],
+            "income_tax": calculate_income_tax[0],
             "university_repayments": 0,
         }
