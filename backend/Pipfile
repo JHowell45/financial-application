@@ -12,6 +12,7 @@ flask = "*"
 gunicorn = "*"
 flask-restplus = "*"
 flask-sqlalchemy = "*"
+inflection = "*"
 
 [requires]
 python_version = "3.7"
