@@ -1,2 +1,7 @@
 # IDE:
 .idea
+
+# Ignore test docs:
+backend/docs/test/
+
+backend/\.coverage
