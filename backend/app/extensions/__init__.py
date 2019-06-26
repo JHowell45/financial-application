@@ -3,4 +3,5 @@
 This file contains the instances of all of the extensions required for this Flask
 application.
 """
+from .database_extension import db
 from .restplus_extension import api

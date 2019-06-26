@@ -5,7 +5,7 @@ also initialising any of the extensions used by the application.
 """
 from flask import Flask
 
-from app.extensions import api
+from app.extensions import api, db
 from config import Config
 
 
@@ -22,5 +22,6 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
 
     api.init_app(app)
+    db.init_app(app)
 
     return app
