@@ -11,6 +11,7 @@ black = "*"
 flask = "*"
 gunicorn = "*"
 flask-restplus = "*"
+flask-sqlalchemy = "*"
 
 [requires]
 python_version = "3.7"
