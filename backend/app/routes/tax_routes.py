@@ -6,7 +6,7 @@ down.
 """
 from flask_restplus import Namespace, Resource
 
-from app.income_taxes import calculate_income_tax
+from app.tax_calculations import calculate_income_tax
 
 api = Namespace(
     "taxes",
