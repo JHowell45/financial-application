@@ -1,9 +1,36 @@
 version: '3'
-
+volumes:
+  dbdata: null
 services:
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "8080:8000"
+  database:
+    image: "mysql:5.7"
+    volumes:
+      - "dbdata:/var/lib/mysql"
+    environment:
+      MYSQL_DATABASE: backend
+      MYSQL_USER: jacob
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+    ports:
+      - "33061:3306"
+  database_admin:
+    image: "phpmyadmin/phpmyadmin:latest"
+    environment:
+      PMA_USER: root
+      PMA_PASSWORD: secret
+      MYSQL_USER: jacob
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+    restart: always
+    depends_on:
+      - database
+    links:
+      - database:db
+    ports:
+      - "8181:80"
