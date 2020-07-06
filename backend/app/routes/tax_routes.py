@@ -38,6 +38,6 @@ class IncomeTaxes(Resource):
             "total_income": income,
             "national_insurance": 0,
             "leftover_income": 0,
-            "income_tax": calculate_income_tax(),
+            "income_tax": calculate_income_tax(income),
             "university_repayments": 0,
         }
