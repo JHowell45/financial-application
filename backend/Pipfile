@@ -16,7 +16,7 @@ pytest-flakes = "*"
 [packages]
 flask = "*"
 gunicorn = "*"
-flask-restplus = "*"
+flask-restx = "*"
 
 [requires]
 python_version = "3.7"
