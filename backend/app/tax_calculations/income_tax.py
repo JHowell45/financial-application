@@ -14,4 +14,4 @@ def calculate_income_tax(pre_tax_income: int) -> float:
     :param pre_tax_income: the users pre-tax income.
     :return: the income tax for the user.
     """
-    pass
+    return 0
