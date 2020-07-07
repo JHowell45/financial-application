@@ -4,8 +4,8 @@ This file contains the functions for calculating the income tax for a given user
 income and returning both the leftover income tax and the income tax being paid.
 """
 
-PERSONAL_ALLOWANCE = 12500
-BASIC_RATE_MIN = 12501
+PERSONAL_ALLOWANCE = 12509
+BASIC_RATE_MIN = 12510
 BASIC_RATE_MAX = 50000
 HIGHER_RATE_MIN = 50001
 HIGHER_RATE_MAX = 150000
@@ -25,28 +25,13 @@ def calculate_income_tax(pre_tax_income: int) -> float:
     :param pre_tax_income: the users pre-tax income.
     :return: the income tax for the user.
     """
-    tax = 0
+    total_tax = 0
     for bracket, next_bracket, rate in generate_tax_sections():
-        tax, pre_tax_income = calculate_tax_for_bracket(
+        temp_tax, pre_tax_income = calculate_tax_for_bracket(
             pre_tax_income, bracket, next_bracket, rate
         )
-        print(
-            f"bracket: {bracket}, next_bracket: {next_bracket}, rate: {rate} "
-            f"|| tax: {tax}, pre_tax_income: {pre_tax_income}"
-        )
-    # if pre_tax_income >= ADDITIONAL_RATE:
-    #     taxable_income = pre_tax_income - HIGHER_RATE_MAX
-    #
-    #     tax += taxable_income * ADDITIONAL_RATE_PERCENTAGE
-    #     pre_tax_income = HIGHER_RATE_MAX
-    # if pre_tax_income >= HIGHER_RATE_MIN:
-    #     taxable_income = pre_tax_income - BASIC_RATE_MAX
-    #     tax += taxable_income * HIGHER_RATE_PERCENTAGE
-    #     pre_tax_income = BASIC_RATE_MAX
-    # if pre_tax_income >= BASIC_RATE_MIN:
-    #     taxable_income = pre_tax_income - PERSONAL_ALLOWANCE
-    #     tax += taxable_income * BASIC_RATE_PERCENTAGE
-    return tax
+        total_tax += temp_tax
+    return round(total_tax, 2)
 
 
 def generate_tax_sections():
@@ -57,7 +42,7 @@ def generate_tax_sections():
 
     :return: the tax bracket, the next bracket and the tax percentage.
     """
-    tax_brackets = [ADDITIONAL_RATE, HIGHER_RATE_MAX, BASIC_RATE_MAX]
+    tax_brackets = [ADDITIONAL_RATE, HIGHER_RATE_MIN, BASIC_RATE_MIN]
     next_bracket = [HIGHER_RATE_MAX, BASIC_RATE_MAX, PERSONAL_ALLOWANCE]
     tax_rates = [
         ADDITIONAL_RATE_PERCENTAGE,
