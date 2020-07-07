@@ -1,7 +1,7 @@
 """Use this file for calculating the income tax.
 
-This file contains the functions for calculating the income tax for a given user
-income and returning both the leftover income tax and the income tax being paid.
+This file contains the functions for calculating the income tax for a given user's
+income and returning the tax being paid.
 """
 
 PERSONAL_ALLOWANCE = 12509
@@ -16,19 +16,19 @@ HIGHER_RATE_PERCENTAGE = 0.4
 ADDITIONAL_RATE_PERCENTAGE = 0.45
 
 
-def calculate_income_tax(pre_tax_income: int) -> float:
+def calculate_income_tax(income: float) -> float:
     """Use this function for calculating the income tax for the users income.
 
     This function is used for just calculating the income tax for a given income and
     returning both the income tax and the leftover income.
 
-    :param pre_tax_income: the users pre-tax income.
+    :param income: the users pre-tax income.
     :return: the income tax for the user.
     """
     total_tax = 0
     for bracket, next_bracket, rate in generate_tax_sections():
-        temp_tax, pre_tax_income = calculate_tax_for_bracket(
-            pre_tax_income, bracket, next_bracket, rate
+        temp_tax, income = calculate_tax_for_bracket(
+            income, bracket, next_bracket, rate
         )
         total_tax += temp_tax
     return round(total_tax, 2)
