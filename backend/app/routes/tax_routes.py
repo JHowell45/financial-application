@@ -34,10 +34,16 @@ class IncomeTaxes(Resource):
         :param income: the users income.
         :return: the income, leftover income and the tax breakdown.
         """
+        income_tax = calculate_income_tax(income)
+        national_insurance = 0
+        university_repayments = 0
+        leftover_income = (
+            income - income_tax - national_insurance - university_repayments
+        )
         return {
             "total_income": income,
-            "national_insurance": 0,
-            "leftover_income": 0,
-            "income_tax": calculate_income_tax(income),
-            "university_repayments": 0,
+            "national_insurance": national_insurance,
+            "leftover_income": leftover_income,
+            "income_tax": income_tax,
+            "university_repayments": university_repayments,
         }
