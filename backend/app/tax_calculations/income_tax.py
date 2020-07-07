@@ -26,12 +26,65 @@ def calculate_income_tax(pre_tax_income: int) -> float:
     :return: the income tax for the user.
     """
     tax = 0
-    if pre_tax_income >= ADDITIONAL_RATE:
-        tax += (pre_tax_income - HIGHER_RATE_MAX) * ADDITIONAL_RATE_PERCENTAGE
-        pre_tax_income = HIGHER_RATE_MAX
-    if pre_tax_income >= HIGHER_RATE_MIN:
-        tax += (pre_tax_income - BASIC_RATE_MAX) * HIGHER_RATE_PERCENTAGE
-        pre_tax_income = BASIC_RATE_MAX
-    if pre_tax_income >= BASIC_RATE_MIN:
-        tax += (pre_tax_income - PERSONAL_ALLOWANCE) * BASIC_RATE_PERCENTAGE
+    for bracket, next_bracket, rate in generate_tax_sections():
+        tax, pre_tax_income = calculate_tax_for_bracket(
+            pre_tax_income, bracket, next_bracket, rate
+        )
+        print(
+            f"bracket: {bracket}, next_bracket: {next_bracket}, rate: {rate} "
+            f"|| tax: {tax}, pre_tax_income: {pre_tax_income}"
+        )
+    # if pre_tax_income >= ADDITIONAL_RATE:
+    #     taxable_income = pre_tax_income - HIGHER_RATE_MAX
+    #
+    #     tax += taxable_income * ADDITIONAL_RATE_PERCENTAGE
+    #     pre_tax_income = HIGHER_RATE_MAX
+    # if pre_tax_income >= HIGHER_RATE_MIN:
+    #     taxable_income = pre_tax_income - BASIC_RATE_MAX
+    #     tax += taxable_income * HIGHER_RATE_PERCENTAGE
+    #     pre_tax_income = BASIC_RATE_MAX
+    # if pre_tax_income >= BASIC_RATE_MIN:
+    #     taxable_income = pre_tax_income - PERSONAL_ALLOWANCE
+    #     tax += taxable_income * BASIC_RATE_PERCENTAGE
     return tax
+
+
+def generate_tax_sections():
+    """Use this function to calculate the rates and brackets for the tax sections.
+
+    This function is used for returning the tax bracket, the following bracket to do
+    subtractions to get the taxable amount and the tax rate for the bracket.
+
+    :return: the tax bracket, the next bracket and the tax percentage.
+    """
+    tax_brackets = [ADDITIONAL_RATE, HIGHER_RATE_MAX, BASIC_RATE_MAX]
+    next_bracket = [HIGHER_RATE_MAX, BASIC_RATE_MAX, PERSONAL_ALLOWANCE]
+    tax_rates = [
+        ADDITIONAL_RATE_PERCENTAGE,
+        HIGHER_RATE_PERCENTAGE,
+        BASIC_RATE_PERCENTAGE,
+    ]
+    for bracket, next_bracket, rate in zip(tax_brackets, next_bracket, tax_rates):
+        yield bracket, next_bracket, rate
+
+
+def calculate_tax_for_bracket(
+    income: float, tax_bracket: int, next_bracket: int, tax_rate: float
+):
+    """Use this function to calculate the tax amount for a specific bracket.
+
+    This function is used for calculating the tax amount for a specific tax bracket
+    given the income.
+
+    :param income: the income to tax.
+    :param tax_bracket: the tax bracket being checked.
+    :param next_bracket: the next bracket to only tax the specific amount.
+    :param tax_rate: the tax rate for the given bracket.
+    :return: the taxed amount and the new income amount to pass to following function.
+    """
+    if income >= tax_bracket:
+        taxable_income = income - next_bracket
+        taxed_amount = taxable_income * tax_rate
+        return taxed_amount, next_bracket
+    else:
+        return 0, income
