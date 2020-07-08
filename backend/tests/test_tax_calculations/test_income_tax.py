@@ -3,7 +3,7 @@
 """
 import pytest
 
-from app.tax_calculations.income_tax import calculate_income_tax
+from app.tax_calculations import calculate_income_tax
 
 
 class TestIncomeTax:
