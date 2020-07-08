@@ -6,7 +6,7 @@ down.
 """
 from flask_restx import Namespace, Resource
 
-from app.tax_calculations import calculate_income_tax
+from app.tax_calculations import calculate_income_tax, calculate_national_insurance
 
 api = Namespace(
     "taxes",
@@ -35,7 +35,7 @@ class IncomeTaxes(Resource):
         :return: the income, leftover income and the tax breakdown.
         """
         income_tax = calculate_income_tax(income)
-        national_insurance = 0
+        national_insurance = calculate_national_insurance(income)
         university_repayments = 0
         leftover_income = (
             income - income_tax - national_insurance - university_repayments
