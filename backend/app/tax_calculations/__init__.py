@@ -35,10 +35,13 @@ def calculate_income_tax(income: float) -> float:
 
 
 def calculate_national_insurance(income: float) -> float:
-    """
+    """Use this function for calculating the national insurance for the users income.
 
-    :param income:
-    :return:
+    This function is used for just calculating the national insurance for a given
+    income and returning both the national insurance and the leftover income.
+
+    :param income: the users pre-tax income.
+    :return: the national insurance for the user.
     """
     EXEMPT = 9500
     BASE_BRACKET_MIN = 9501
